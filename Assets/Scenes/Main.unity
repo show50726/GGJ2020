@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolOffer: {fileID: 4210837923086339281, guid: 183af3127314e4a4ba0b5d32aab0603c,
     type: 3}
+  icon: {fileID: 21300000, guid: 7bc5cef9fe3ce45fc96b5d1f91a1eb92, type: 3}
   toolType: 0
   y0: 0
   amplitude: 0.5
@@ -923,6 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolOffer: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+  icon: {fileID: 21300000, guid: 001c3407cf3424c9a9ef40c9a64e4ea2, type: 3}
   toolType: 1
   y0: 0
   amplitude: 0.4
@@ -1246,12 +1248,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6468606025949846834, guid: 19f620a76c4c44f27af84a13d8ce3834,
-        type: 3}
-      propertyPath: tool
-      value: 
-      objectReference: {fileID: 4210837923086339281, guid: 183af3127314e4a4ba0b5d32aab0603c,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19f620a76c4c44f27af84a13d8ce3834, type: 3}
 --- !u!1001 &8283386210137954478
@@ -1405,16 +1401,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9130479498477922339, guid: 7471336369db340eda49c5118469ea63,
-        type: 3}
-      propertyPath: type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9130479498477922339, guid: 7471336369db340eda49c5118469ea63,
-        type: 3}
-      propertyPath: tool
-      value: 
-      objectReference: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7471336369db340eda49c5118469ea63, type: 3}

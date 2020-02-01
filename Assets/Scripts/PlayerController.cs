@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Player.characterType type;
     public GameObject tool;
+    public GameObject icon;
     public bool isClimbing = false;
     public bool isJumping = false;
     private Rigidbody2D player;
@@ -41,9 +42,10 @@ public class PlayerController : MonoBehaviour
         return 0;
     }
 
-    public void getTool(GameObject tool, Player.characterType toolType){
+    public void getTool(GameObject tool, Player.characterType toolType, Sprite icon){
         if(toolType == type){
             this.tool = tool;
+            this.icon.GetComponent<SpriteRenderer>().sprite = icon;
         }
     }
 
@@ -83,6 +85,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(tool != null){
+            icon.SetActive(true);
+        }
+        else{
+            icon.SetActive(false);
+        }
+
         if (isClimbing && Input.GetKey(keyClimb))
         {
             player.AddForce(Vector2.up * GetMoveParameter(MoveParameter.CLIMB), ForceMode2D.Force);

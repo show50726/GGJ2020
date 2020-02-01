@@ -5,6 +5,7 @@ using UnityEngine;
 public class ToolsPool : MonoBehaviour
 {
     public GameObject toolOffer;
+    public Sprite icon;
     public Player.characterType toolType;
     public float y0;
     public float amplitude;
@@ -23,7 +24,7 @@ public class ToolsPool : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player"){
-            other.GetComponent<PlayerController>().getTool(toolOffer, toolType);
+            other.GetComponent<PlayerController>().getTool(toolOffer, toolType, icon);
         }
     }
 }
