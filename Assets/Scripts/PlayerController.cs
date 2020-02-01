@@ -5,11 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public bool isClimb = false;
+    public Rigidbody2D player1;
+    public Rigidbody2D player2;
+
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
+
     enum MoveParameter
     {
-        RUN = 1,
-        CLIMB = 1,
-        JUMP = 1
+        RUN,
+        CLIMB,
+        JUMP
     }
     enum Player1Move
     {
@@ -33,30 +39,49 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        KeyInput();
-    }
-
-    void KeyInput()
-    {
         if (isClimb && Input.GetKey((KeyCode)Player1Move.CLIMB))
         {
-            transform.Translate(Vector2.up * (int)MoveParameter.CLIMB * Time.deltaTime);
+            player1.AddForce(Vector2.up * GetMoveParameter(MoveParameter.CLIMB), ForceMode2D.Force);
         }
         else
         {
-            if (Input.GetKey((KeyCode)Player1Move.LEFT))
+            if (Input.GetKey(KeyCode.A))
             {
-                transform.Translate(Vector2.left * (int)MoveParameter.RUN * Time.deltaTime);
+                player1.AddForce(Vector2.left * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Force);
             }
             else if (Input.GetKey((KeyCode)Player1Move.RIGHT))
             {
-                transform.Translate(Vector2.right * (int)MoveParameter.RUN * Time.deltaTime);
+                player1.AddForce(Vector2.right * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Force);
             }
 
             if (Input.GetKey((KeyCode)Player1Move.JUMP))
             {
-                transform.Translate(Vector2.up * (int)MoveParameter.JUMP * Time.deltaTime);
+                if (player1.velocity.y < 0)
+                {
+                    player1.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+                }
+                //else if (player1.velocity.y > 0 && !Input.GetButton("Jump"))
+                else if (player1.velocity.y > 0)
+                {
+                    player1.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+                }
             }
         }
+    }
+
+    float GetMoveParameter(MoveParameter move)
+    {
+        switch (move)
+        {
+            case MoveParameter.RUN:
+                return 10;
+            case MoveParameter.CLIMB:
+                return 10;
+            case MoveParameter.JUMP:
+                return 50;
+        }
+
+        // unhandled
+        return 0;
     }
 }
