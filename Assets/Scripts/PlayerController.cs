@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         switch (move)
         {
             case MoveParameter.RUN:
-                return 0.8f;
+                return 0.6f;
             case MoveParameter.CLIMB:
                 return 30;
             case MoveParameter.JUMP:
@@ -82,12 +82,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(keyLeft) && !isJumping)
             {
-                if(player.velocity.x <= 8f)
+                if(player.velocity.x <= 6f)
                     player.AddForce(Vector2.left * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
             }
             else if (Input.GetKey(keyRight) && !isJumping)
             {
-                if(player.velocity.x <= 8f)
+                if(player.velocity.x <= 6f)
                     player.AddForce(Vector2.right * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
             }
             else{
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
                 isJumping = true;
             }
 
-            RaycastHit2D hit = Physics2D.Raycast(player.transform.position - Vector3.up * 1f, -Vector2.up, 1f);
+            RaycastHit2D hit = Physics2D.Raycast(player.transform.position - Vector3.up * 0.8f, -Vector2.up, 0.1f);
             if (hit.collider != null && isJumping)
             {
                 isJumping = false;

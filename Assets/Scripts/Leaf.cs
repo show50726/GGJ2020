@@ -4,30 +4,33 @@ using UnityEngine;
 
 public class Leaf : MonoBehaviour
 {
-    public float dampTarget = -50f;
-    public float backTarget = 331f;
+    public Vector3 dampTarget;
+    public Vector3 backTarget;
     private float dampingTargetValue;
     private float x, v;
     private bool isDamping = false;
     // Start is called before the first frame update
+
     void Start()
     {
-        backTarget = transform.eulerAngles.z;
-        if(Mathf.Abs(dampTarget-backTarget) > Mathf.Abs(dampTarget+(360f-backTarget))){
-            backTarget = -360f+backTarget;
+        backTarget = transform.eulerAngles;
+        if(Mathf.Abs(dampTarget.z-backTarget.z) > Mathf.Abs(dampTarget.z+(360f-backTarget.z))){
+            backTarget.z = -360f+backTarget.z;
         }
+        dampTarget = new Vector3(backTarget.x, backTarget.y, backTarget.z - 10f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if(Input.GetKeyDown(KeyCode.Space)){
             Addforce();
         }
         if(Input.GetKeyUp(KeyCode.Space)){
             Leave();
         }
-        
+        */
     }
 
     /// <summary>
@@ -41,22 +44,34 @@ public class Leaf : MonoBehaviour
     }
 
     public void Addforce(){
-        dampingTargetValue = dampTarget;
+        dampingTargetValue = dampTarget.z;
         isDamping = true;
     }
 
     public void Leave(){
-        dampingTargetValue = backTarget;
+        dampingTargetValue = backTarget.z;
         isDamping = true;
     }
 
     private void damping(){
         Spring(x, v, dampingTargetValue, 0.23f, (float)8.0 * Mathf.PI, Time.deltaTime);
         Quaternion cur = Quaternion.identity;
-        cur.eulerAngles = new Vector3(0, 0, x);
+        cur.eulerAngles = new Vector3(backTarget.x, backTarget.y, x);
         transform.rotation = cur;
         if(x == dampingTargetValue){
             isDamping = false;
+        }
+    }
+    
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == "Player"){
+            Addforce();
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other) {
+        if(other.gameObject.tag == "Player"){
+            Leave();
         }
     }
 
