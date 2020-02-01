@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_stateController = GameObject.FindGameObjectWithTag("StateController");
+        m_stateController = GameObject.FindGameObjectWithTag("StateController").GetComponent<StateController>();
     }
 
     // Update is called once per frame
