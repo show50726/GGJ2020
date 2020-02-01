@@ -315,6 +315,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: leaf (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8283386209828893262, guid: 752e24a32d7644e31914f37dc12ad193,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8283386209828893260, guid: 752e24a32d7644e31914f37dc12ad193,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -545,7 +550,7 @@ GameObject:
   - component: {fileID: 2075782798}
   - component: {fileID: 2075782800}
   - component: {fileID: 2075782801}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,6 +743,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468606025949846834, guid: 19f620a76c4c44f27af84a13d8ce3834,
+        type: 3}
+      propertyPath: tool
+      value: 
+      objectReference: {fileID: 4210837923086339281, guid: 183af3127314e4a4ba0b5d32aab0603c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19f620a76c4c44f27af84a13d8ce3834, type: 3}
 --- !u!1001 &8283386210137954478
@@ -751,6 +762,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: leaf
+      objectReference: {fileID: 0}
+    - target: {fileID: 8283386209828893262, guid: 752e24a32d7644e31914f37dc12ad193,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8283386209828893260, guid: 752e24a32d7644e31914f37dc12ad193,
         type: 3}

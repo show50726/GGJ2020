@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Player.characterType type;
+    public GameObject tool;
     public bool isClimbing = false;
     public bool isJumping = false;
     private Rigidbody2D player;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         // unhandled
         return 0;
     }
+
     void AssignKey()
     {
         switch (player.name)
@@ -80,6 +83,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if(Input.GetKeyDown(keyAttack) && tool != null){
+                RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
+                if(h.collider != null){
+                    Instantiate(tool, h.point, Quaternion.identity);
+                    tool = null;
+                }
+            }
+
             if (Input.GetKey(keyLeft) && !isJumping)
             {
                 transform.localScale = new Vector3(1, 1, 1);
