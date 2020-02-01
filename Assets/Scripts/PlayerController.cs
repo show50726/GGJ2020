@@ -82,13 +82,17 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(keyLeft) && !isJumping)
             {
-                if(player.velocity.x <= 6f)
-                    player.AddForce(Vector2.left * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
+                transform.localScale = new Vector3(1, 1, 1);
+                player.velocity = new Vector3(-4f, player.velocity.y, 0f);
+                //if(player.velocity.x <= 6f)
+                //    player.AddForce(Vector2.left * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
             }
             else if (Input.GetKey(keyRight) && !isJumping)
             {
-                if(player.velocity.x <= 6f)
-                    player.AddForce(Vector2.right * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
+                transform.localScale = new Vector3(-1, 1, 1);
+                player.velocity = new Vector3(4f, player.velocity.y, 0f);
+                //if(player.velocity.x <= 6f)
+                //    player.AddForce(Vector2.right * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
             }
             else{
                 //player.velocity = new Vector2(0 ,player.velocity.y);
