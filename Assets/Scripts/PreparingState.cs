@@ -38,5 +38,11 @@ public class PreparingState : IState
     public override void OnStateExit() { 
         countDownText.text = "Go!";
         Debug.Log("Time's Up! Go to running state");
+        m_controller.StartCoroutine(_wait());
+    }
+
+    IEnumerator _wait(){
+        yield return new WaitForSeconds(0.5f);
+        countDownText.gameObject.SetActive(false);
     }
 }
