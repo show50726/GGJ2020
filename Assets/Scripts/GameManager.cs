@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public float roundTime = 50f;
     public float timeLeft;
+    private StateController m_stateController;
 
     private void Awake()
     {
@@ -23,13 +24,15 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_stateController = GameObject.FindGameObjectWithTag("StateController");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(m_stateController != null){
+            m_stateController.StateUpdate();
+        }
     }
 
     public enum State
