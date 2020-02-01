@@ -10,6 +10,7 @@ public class IState
     public IState(StateController controller)
     {
         m_controller = controller;
+
     }
 
     public virtual void OnStateEnter() { }
