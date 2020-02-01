@@ -217,8 +217,8 @@ MonoBehaviour:
     type: 3}
   toolType: 0
   y0: 0
-  amplitude: 0.3
-  speed: 1
+  amplitude: 0.5
+  speed: 1.2
 --- !u!61 &132146418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -925,7 +925,7 @@ MonoBehaviour:
   toolOffer: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
   toolType: 1
   y0: 0
-  amplitude: 0.3
+  amplitude: 0.4
   speed: 0.9
 --- !u!1 &1801635025
 GameObject:

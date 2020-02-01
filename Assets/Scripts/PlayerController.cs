@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
                 keyRight = KeyCode.D;
                 keyClimb = KeyCode.W;
                 keyJump = KeyCode.Space;
-                keyAttack = KeyCode.LeftControl;
+                keyAttack = KeyCode.LeftShift;
                 break;
             case "Player2":
                 keyLeft = KeyCode.LeftArrow;
