@@ -17,6 +17,7 @@ public class Leaf : MonoBehaviour
         if(Mathf.Abs(dampTarget.z-backTarget.z) > Mathf.Abs(dampTarget.z+(360f-backTarget.z))){
             backTarget.z = -360f+backTarget.z;
         }
+        transform.eulerAngles = backTarget;
         dampTarget = new Vector3(backTarget.x, backTarget.y, backTarget.z - 10f);
     }
 

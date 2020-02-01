@@ -14,15 +14,17 @@ public class MainTree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Reset();
+        initialize();
     }
 
-    public void Reset(){
+    public void initialize(){
         curHP = maxHP;
         isDead = false;
+        /*
         foreach(var wound in Wounds){
             wound.SetActive(false);
         }
+        */
     }
 
     public void changeHP(float delta){

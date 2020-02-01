@@ -45,16 +45,16 @@ public class PlayerController : MonoBehaviour
             case "Player1":
                 keyLeft = KeyCode.S;
                 keyRight = KeyCode.D;
-                keyClimb = KeyCode.UpArrow;
+                keyClimb = KeyCode.W;
                 keyJump = KeyCode.Space;
                 keyAttack = KeyCode.LeftControl;
                 break;
             case "Player2":
-                keyLeft = KeyCode.Keypad4;
-                keyRight = KeyCode.Keypad6;
-                keyClimb = KeyCode.Keypad8;
-                keyJump = KeyCode.Keypad0;
-                keyAttack = KeyCode.KeypadEnter;
+                keyLeft = KeyCode.LeftArrow;
+                keyRight = KeyCode.RightArrow;
+                keyClimb = KeyCode.UpArrow;
+                keyJump = KeyCode.RightShift;
+                keyAttack = KeyCode.M;
                 break;
             default:
                 keyLeft = KeyCode.S;
@@ -109,7 +109,9 @@ public class PlayerController : MonoBehaviour
             }
 
             RaycastHit2D hit = Physics2D.Raycast(player.transform.position - Vector3.up * 0.8f, -Vector2.up, 0.1f);
-            if (hit.collider != null && isJumping)
+            RaycastHit2D hit1 = Physics2D.Raycast(player.transform.position - Vector3.up * 0.8f - Vector3.right * 0.2f, -Vector2.up, 0.1f);
+            RaycastHit2D hit2 = Physics2D.Raycast(player.transform.position - Vector3.up * 0.8f + Vector3.right * 0.2f, -Vector2.up, 0.1f);
+            if ((hit.collider != null || hit1.collider != null || hit2.collider!=null) && isJumping)
             {
                 isJumping = false;
             }
