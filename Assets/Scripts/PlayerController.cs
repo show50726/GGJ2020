@@ -4,84 +4,180 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool isClimb = false;
-    public Rigidbody2D player1;
-    public Rigidbody2D player2;
+    public MainTree tree;
+    public Player.characterType type;
+    public GameObject tool;
+    public GameObject icon;
+    public bool isClimbing = false;
+    public bool isJumping = false;
+    private Rigidbody2D player;
 
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
 
+    public KeyCode keyLeft;
+    public KeyCode keyRight;
+    public KeyCode keyClimb;
+    public KeyCode keyJump;
+    public KeyCode keyAttack;
+
+    private StateController stateController;
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
+        stateController = GameObject.FindGameObjectWithTag("StateController").GetComponent<StateController>();
+    }
     enum MoveParameter
     {
         RUN,
         CLIMB,
         JUMP
     }
-    enum Player1Move
-    {
-        LEFT = KeyCode.A,
-        RIGHT = KeyCode.D,
-        CLIMB = KeyCode.W,
-        JUMP = KeyCode.Space,
-        ATTACK = KeyCode.LeftControl
-    }
-    enum Player2Move
-    {
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (isClimb && Input.GetKey((KeyCode)Player1Move.CLIMB))
-        {
-            player1.AddForce(Vector2.up * GetMoveParameter(MoveParameter.CLIMB), ForceMode2D.Force);
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.A))
-            {
-                player1.AddForce(Vector2.left * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Force);
-            }
-            else if (Input.GetKey((KeyCode)Player1Move.RIGHT))
-            {
-                player1.AddForce(Vector2.right * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Force);
-            }
-
-            if (Input.GetKey((KeyCode)Player1Move.JUMP))
-            {
-                if (player1.velocity.y < 0)
-                {
-                    player1.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-                }
-                //else if (player1.velocity.y > 0 && !Input.GetButton("Jump"))
-                else if (player1.velocity.y > 0)
-                {
-                    player1.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-                }
-            }
-        }
-    }
-
     float GetMoveParameter(MoveParameter move)
     {
         switch (move)
         {
             case MoveParameter.RUN:
-                return 10;
+                return 0.6f;
             case MoveParameter.CLIMB:
-                return 10;
+                return 30;
             case MoveParameter.JUMP:
-                return 50;
+                return 30;
         }
 
         // unhandled
         return 0;
+    }
+
+    public void getTool(GameObject tool, Player.characterType toolType, Sprite icon){
+        if(toolType == type){
+            this.tool = tool;
+            this.icon.GetComponent<SpriteRenderer>().sprite = icon;
+        }
+    }
+
+    void AssignKey()
+    {
+        switch (player.name)
+        {
+            case "Player1":
+                keyLeft = KeyCode.S;
+                keyRight = KeyCode.D;
+                keyClimb = KeyCode.W;
+                keyJump = KeyCode.Space;
+                keyAttack = KeyCode.LeftShift;
+                break;
+            case "Player2":
+                keyLeft = KeyCode.LeftArrow;
+                keyRight = KeyCode.RightArrow;
+                keyClimb = KeyCode.UpArrow;
+                keyJump = KeyCode.RightShift;
+                keyAttack = KeyCode.M;
+                break;
+            default:
+                keyLeft = KeyCode.S;
+                keyRight = KeyCode.D;
+                keyClimb = KeyCode.UpArrow;
+                keyJump = KeyCode.Space;
+                keyAttack = KeyCode.LeftControl;
+                break;
+        }
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GetComponent<Rigidbody2D>();
+        AssignKey();
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        if(stateController.state.state != GameManager.State.Running)
+            return;
+
+        if(tool != null){
+            icon.SetActive(true);
+        }
+        else{
+            icon.SetActive(false);
+        }
+
+        if (isClimbing && Input.GetKey(keyClimb))
+        {
+            player.AddForce(Vector2.up * GetMoveParameter(MoveParameter.CLIMB), ForceMode2D.Force);
+        }
+        else
+        {
+            if(Input.GetKeyDown(keyAttack) && tool != null){
+                if(type == Player.characterType.Attack){
+                    RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
+                    if(h.collider != null){
+                        tree.changeHP(tool.GetComponent<Tool>().Value);
+                        Instantiate(tool, h.point, Quaternion.identity);
+                        tool = null;
+                    }
+                }
+                else{
+                    RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Cancer"));
+                    if(h.collider != null){
+                        tree.changeHP(tool.GetComponent<Tool>().Value);
+                        Instantiate(tool, h.point, Quaternion.identity);
+                        Destroy(h.transform.gameObject);
+                        tool = null;
+                    }
+                }
+                
+            }
+
+            if (Input.GetKey(keyLeft) && !isJumping)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                player.velocity = new Vector3(-4f, player.velocity.y, 0f);
+                //if(player.velocity.x <= 6f)
+                //    player.AddForce(Vector2.left * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
+            }
+            else if (Input.GetKey(keyRight) && !isJumping)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                player.velocity = new Vector3(4f, player.velocity.y, 0f);
+                //if(player.velocity.x <= 6f)
+                //    player.AddForce(Vector2.right * GetMoveParameter(MoveParameter.RUN), ForceMode2D.Impulse);
+            }
+            else{
+                //player.velocity = new Vector2(0 ,player.velocity.y);
+            }
+
+            if (Input.GetKeyDown(keyJump) && !isJumping)
+            {
+                player.velocity = Vector2.up * 8f;
+            }
+
+            if (Input.GetKeyUp(keyJump))
+            {
+                isJumping = true;
+            }
+
+            RaycastHit2D hit = Physics2D.Raycast(player.transform.position - Vector3.up * 0.8f, -Vector2.up, 0.1f);
+            RaycastHit2D hit1 = Physics2D.Raycast(player.transform.position - Vector3.up * 0.8f - Vector3.right * 0.2f, -Vector2.up, 0.1f);
+            RaycastHit2D hit2 = Physics2D.Raycast(player.transform.position - Vector3.up * 0.8f + Vector3.right * 0.2f, -Vector2.up, 0.1f);
+            if ((hit.collider != null || hit1.collider != null || hit2.collider!=null) && isJumping)
+            {
+                isJumping = false;
+            }
+
+            if (player.velocity.y < 0)
+            {
+                player.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            }
+            else if (player.velocity.y > 0 && !Input.GetKey(keyJump))
+            {
+                player.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
+
+        }
     }
 }

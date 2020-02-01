@@ -4,26 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
-
     private StateController m_stateController;
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
     }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        m_stateController = GameObject.FindGameObjectWithTag("StateController").GetComponent<StateController>();
+        m_stateController = GetComponent<StateController>();
     }
 
     // Update is called once per frame

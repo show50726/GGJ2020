@@ -13,7 +13,8 @@ using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour
 {
     //Make sure to attach these Buttons in the Inspector
-    public Button m_YourFirstButton, m_YourSecondButton, m_YourThirdButton;
+    Button m_YourFirstButton;
+    //public Button  m_YourSecondButton, m_YourThirdButton;
 
     void Start()
     {
@@ -25,10 +26,10 @@ public class StartGame : MonoBehaviour
         //Output this to console when Button1 or Button3 is clicked
         Debug.Log("You have clicked the button!");
         // Application.LoadLevel(1);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Main");
     }
 
-    void TaskWithParameters(string message)
+    /*void TaskWithParameters(string message)
     {
         //Output this to console when the Button2 is clicked
         Debug.Log(message);
@@ -38,5 +39,5 @@ public class StartGame : MonoBehaviour
     {
         //Output this to console when the Button3 is clicked
         Debug.Log("Button clicked = " + buttonNo);
-    }
+    }*/
 }
