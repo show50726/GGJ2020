@@ -41,6 +41,12 @@ public class PlayerController : MonoBehaviour
         return 0;
     }
 
+    public void getTool(GameObject tool, Player.characterType toolType){
+        if(toolType == type){
+            this.tool = tool;
+        }
+    }
+
     void AssignKey()
     {
         switch (player.name)
@@ -142,7 +148,7 @@ public class PlayerController : MonoBehaviour
             {
                 player.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
             }
-            else if (player.velocity.y > 0 && !Input.GetButton("Jump"))
+            else if (player.velocity.y > 0 && !Input.GetKey(keyJump))
             {
                 player.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
             }
