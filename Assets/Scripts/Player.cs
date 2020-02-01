@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public characterType type;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +23,5 @@ public class Player : MonoBehaviour
     {
         Attack,
         Defense
-    }
-
-    public enum Movement{
-        Stay,
-        Moving,
-        Jumping,
-        Climbing,
-        TakeAction
     }
 }
