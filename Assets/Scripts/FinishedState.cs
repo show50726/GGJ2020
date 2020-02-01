@@ -8,8 +8,7 @@ public class FinishedState : IState
 {
     public IState nextState;
     public GameObject WinText;
-    public GameObject player1Win;
-    public GameObject player2Win;
+    public Text Winner;
     private MainTree tree;
 
     private bool winner = false;  // false => player1, player2 otherwise
@@ -22,17 +21,17 @@ public class FinishedState : IState
 
     public override void OnStateEnter() { 
         tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
+        WinText = tree.WinText;
+        WinText.SetActive(true);
+        Winner = GameObject.Find("PlayerName").GetComponent<Text>();
         if(tree.curHP <= 0){
             winner = true;
-            player1Win.SetActive(false);
-            player2Win.SetActive(true);
+            Winner.text = "Player2";
         }
         else{
-            player1Win.SetActive(true);
-            player2Win.SetActive(false);
+            Winner.text = "Player1";
         }
 
-        WinText.SetActive(true);
     }
     public override void StateUpdate() {
         if(Input.GetKeyDown(KeyCode.R)){

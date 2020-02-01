@@ -10,6 +10,7 @@ public class MainTree : MonoBehaviour
     public float maxHP;
 
     public bool isDead = false;
+    public GameObject WinText;
     
     // Start is called before the first frame update
     void Start()
