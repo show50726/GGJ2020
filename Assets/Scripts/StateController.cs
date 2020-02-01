@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class StateController
+public class StateController : MonoBehaviour
 {
-    private IState state;
+    public IState state;
+    
 
+    void Start() {
+        SetState(new PreparingState(this));
+    }
     public void SetState(IState nextState)
     {
         if(state != null)

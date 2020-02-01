@@ -21,12 +21,15 @@ public class PlayerController : MonoBehaviour
     public KeyCode keyJump;
     public KeyCode keyAttack;
 
+    private StateController stateController;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     void Awake()
     {
         tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
+        stateController = GameObject.FindGameObjectWithTag("StateController").GetComponent<StateController>();
     }
     enum MoveParameter
     {
@@ -93,6 +96,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(stateController.state.state != GameManager.State.Running)
+            return;
+
         if(tool != null){
             icon.SetActive(true);
         }
