@@ -84,11 +84,22 @@ public class PlayerController : MonoBehaviour
         else
         {
             if(Input.GetKeyDown(keyAttack) && tool != null){
-                RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
-                if(h.collider != null){
-                    Instantiate(tool, h.point, Quaternion.identity);
-                    tool = null;
+                if(type == Player.characterType.Attack){
+                    RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
+                    if(h.collider != null){
+                        Instantiate(tool, h.point, Quaternion.identity);
+                        tool = null;
+                    }
                 }
+                else{
+                    RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Cancer"));
+                    if(h.collider != null){
+                        Instantiate(tool, h.point, Quaternion.identity);
+                        Destroy(h.transform.gameObject);
+                        tool = null;
+                    }
+                }
+                
             }
 
             if (Input.GetKey(keyLeft) && !isJumping)
