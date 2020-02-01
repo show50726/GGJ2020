@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
-
         AssignKey();
     }
     // Update is called once per frame
