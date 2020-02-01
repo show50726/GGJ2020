@@ -41,6 +41,9 @@ public class Leaf : MonoBehaviour
         if(isDamping){
             damping();
         }
+        if(startCount){
+            _offset += Time.fixedDeltaTime;
+        }
     }
 
     public void Addforce(){
@@ -63,15 +66,20 @@ public class Leaf : MonoBehaviour
         }
     }
     
+    float _offset = 0;
+    bool startCount = false;
     void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             Addforce();
+            _offset = 0;
+            startCount = true;
         }
     }
 
     void OnCollisionExit2D(Collision2D other) {
-        if(other.gameObject.tag == "Player"){
+        if(other.gameObject.tag == "Player" && _offset >= 0.1f){
             Leave();
+            startCount = false;
         }
     }
 
