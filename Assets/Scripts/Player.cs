@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public characterType type;
-    
 
     // Start is called before the first frame update
     void Start()
