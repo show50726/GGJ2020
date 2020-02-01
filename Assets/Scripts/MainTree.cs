@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MainTree : MonoBehaviour
 {
-    public GameObject[] Leaves;
-    public GameObject[] Wounds;
+    //public GameObject[] Leaves;
+    //public GameObject[] Wounds;
     public float curHP;
     public float maxHP;
 
@@ -38,13 +38,13 @@ public class MainTree : MonoBehaviour
     }
 
     public void damageTree(GameObject wound, float damage){
-        wound.SetActive(true);
+        //wound.SetActive(true);
         //damage effect
         changeHP(damage);
     }
 
     public void healTree(GameObject wound, float healVal){
-        wound.SetActive(false);
+        //wound.SetActive(false);
         //heal effect
         changeHP(healVal);
     }

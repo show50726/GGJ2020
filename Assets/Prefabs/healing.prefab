@@ -9354,8 +9354,9 @@ GameObject:
   - component: {fileID: 198858562690846188}
   - component: {fileID: 199240645737875422}
   - component: {fileID: 8271325626177215716}
+  - component: {fileID: -1295658350199283613}
   m_Layer: 0
-  m_Name: CFX4 Aura Bubble C
+  m_Name: healing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14096,3 +14097,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 3
+--- !u!114 &-1295658350199283613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844191813266838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c67898435b2f405c96deb803a085501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: -10

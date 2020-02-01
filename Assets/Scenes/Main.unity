@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 132146417}
   - component: {fileID: 132146418}
   m_Layer: 0
-  m_Name: BrackTool(Temp)
+  m_Name: PosionTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -817,7 +817,7 @@ GameObject:
   - component: {fileID: 1355396466}
   - component: {fileID: 1355396465}
   m_Layer: 0
-  m_Name: Tool02(Temp)
+  m_Name: HealingTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

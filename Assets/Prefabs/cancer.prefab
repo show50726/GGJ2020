@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4210837923086339282}
   - component: {fileID: 4210837923086339283}
   - component: {fileID: 4210837923086339280}
+  - component: {fileID: 5833282823855197832}
   m_Layer: 10
   m_Name: cancer
   m_TagString: Untagged
@@ -97,6 +98,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.54
+--- !u!114 &5833282823855197832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210837923086339281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c67898435b2f405c96deb803a085501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 10
 --- !u!1001 &1050117649651386972
 PrefabInstance:
   m_ObjectHideFlags: 0

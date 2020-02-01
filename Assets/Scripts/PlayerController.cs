@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public MainTree tree;
     public Player.characterType type;
     public GameObject tool;
     public GameObject icon;
@@ -20,6 +21,13 @@ public class PlayerController : MonoBehaviour
     public KeyCode keyJump;
     public KeyCode keyAttack;
 
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
+    }
     enum MoveParameter
     {
         RUN,
@@ -102,6 +110,7 @@ public class PlayerController : MonoBehaviour
                 if(type == Player.characterType.Attack){
                     RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
                     if(h.collider != null){
+                        tree.changeHP(tool.GetComponent<Tool>().Value);
                         Instantiate(tool, h.point, Quaternion.identity);
                         tool = null;
                     }
@@ -109,6 +118,7 @@ public class PlayerController : MonoBehaviour
                 else{
                     RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Cancer"));
                     if(h.collider != null){
+                        tree.changeHP(tool.GetComponent<Tool>().Value);
                         Instantiate(tool, h.point, Quaternion.identity);
                         Destroy(h.transform.gameObject);
                         tool = null;
