@@ -17,6 +17,7 @@ public class StateController
         nextState.OnStateEnter();
     }
 
+
     public void StateUpdate()
     {
         if(state != null)

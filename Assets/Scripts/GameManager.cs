@@ -6,8 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public float roundTime = 50f;
-    public float timeLeft;
+
     private StateController m_stateController;
 
     private void Awake()
