@@ -154,13 +154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClimbing: 0
   isJumping: 0
-  player: {fileID: 36983970}
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
-  keyLeft: 97
-  keyRight: 100
-  keyClimb: 119
-  keyJump: 32
+  keyLeft: 0
+  keyRight: 0
+  keyClimb: 0
+  keyJump: 0
   keyAttack: 0
 --- !u!212 &36983968
 SpriteRenderer:
@@ -244,7 +243,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &36983971
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -494,10 +493,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClimbing: 0
   isJumping: 0
-  player: {fileID: 1515249376}
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
-  keyLeft: 113
+  keyLeft: 0
   keyRight: 0
   keyClimb: 0
   keyJump: 0
