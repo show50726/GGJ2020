@@ -29,6 +29,10 @@ public class StartGame : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
+    public void Quit(){
+        Application.Quit();
+    }
+
     /*void TaskWithParameters(string message)
     {
         //Output this to console when the Button2 is clicked
