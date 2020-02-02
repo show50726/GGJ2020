@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else{
                     RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Cancer"));
-                    if(h.collider != null){
+                    if(h.collider != null && h.collider.gameObject.GetComponent<Tool>().type == tool.GetComponent<Tool>().type){
                         tree.changeHP(tool.GetComponent<Tool>().Value);
                         Instantiate(tool, h.point, Quaternion.identity);
                         Destroy(h.transform.gameObject);
