@@ -6,7 +6,7 @@ public class RunningState : IState
 {
     public IState nextState;
     private float curTime;
-    private float roundTime = 10f;
+    private float roundTime = 100f;
 
     public RunningState(StateController controller) : base(controller)
     {
