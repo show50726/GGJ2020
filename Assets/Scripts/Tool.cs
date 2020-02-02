@@ -16,10 +16,20 @@ public class Tool : MonoBehaviour
     private float _time = 0f;
     private float _total;
 
+    float baseY = -4.3f;
+    float total = 7.6f;
     void Awake()
     {
         tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
         _time = 0f;
+    }
+
+    void Start() {
+        float tmp = transform.position.y - baseY;
+        tmp /= total;
+        tmp = 1 - tmp;
+        if(tmp <= 0.45f) tmp = 0.45f;
+        transform.localScale = new Vector3(tmp, tmp, tmp);
     }
 
     /// <summary>
