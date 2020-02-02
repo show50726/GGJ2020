@@ -11,7 +11,7 @@ public class Tool : MonoBehaviour
     public float lifeTime = 5f;
 
     [SerializeField]
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
     public MainTree tree;
 
     public float y0;

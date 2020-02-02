@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  Value: 10
+  Value: 25
   freq: 2
   lifeTime: 5
   particleSystem: {fileID: 0}
