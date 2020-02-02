@@ -35,7 +35,7 @@ public class FinishedState : IState
     }
     public override void StateUpdate() {
         if(Input.GetKeyDown(KeyCode.R)){
-            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+            SceneManager.LoadScene("index", LoadSceneMode.Single);
         }
     }
     public override void OnStateExit() { }
