@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
                     else if(tool.GetComponent<Tool>().type != Tool.toolType.Pesticide){
                         RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
                         if(h.collider != null){
-                            tree.changeHP(tool.GetComponent<Tool>().Value < 0 ? tool.GetComponent<Tool>().Value : 0);
+                            tree.changeHP(tool.GetComponent<Tool>().Value);
                             Instantiate(tool, h.point, Quaternion.identity);
                             tool = null;
                         }

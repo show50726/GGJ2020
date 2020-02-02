@@ -9167,7 +9167,7 @@ GameObject:
   - component: {fileID: 8724037197391701956}
   - component: {fileID: 1008896645172753054}
   m_Layer: 0
-  m_Name: CFX2_Big_Splash (No Collision)
+  m_Name: Repair2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13773,7 +13773,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 1
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -13841,6 +13841,9 @@ MonoBehaviour:
   lifeTime: 5
   particleSystem: {fileID: 0}
   tree: {fileID: 0}
+  y0: 0
+  amplitude: 0
+  speed: 1
 --- !u!1 &1947517658076526
 GameObject:
   m_ObjectHideFlags: 0

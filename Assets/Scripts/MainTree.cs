@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainTree : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class MainTree : MonoBehaviour
 
     public bool isDead = false;
     public GameObject WinText;
+    public Image LBar;
+    public Image RBar;
     
     // Start is called before the first frame update
     void Start()
@@ -21,6 +24,8 @@ public class MainTree : MonoBehaviour
     public void initialize(){
         curHP = maxHP;
         isDead = false;
+        LBar.fillAmount = curHP / maxHP;
+        RBar.fillAmount = curHP / maxHP;
         /*
         foreach(var wound in Wounds){
             wound.SetActive(false);
@@ -32,11 +37,15 @@ public class MainTree : MonoBehaviour
         curHP -= delta;
         if(curHP <= 0){
             curHP = 0;
+            LBar.fillAmount = curHP / maxHP;
+            RBar.fillAmount = curHP / maxHP;
             Death();
         }
         else if(curHP > maxHP) {
             curHP = maxHP;
         }
+        LBar.fillAmount = curHP / maxHP;
+        RBar.fillAmount = curHP / maxHP;
     }
 
     public void damageTree(GameObject wound, float damage){
