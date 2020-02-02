@@ -28,6 +28,7 @@ public class SoundManager : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
         audiosource.clip = music;
         audiosource.Play();
+
     }
 
     void Update()

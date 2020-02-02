@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private StateController stateController;
 
     private SoundManager soundManager;
+    public Animator animator;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour
         tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
         stateController = GameObject.FindGameObjectWithTag("StateController").GetComponent<StateController>();
         soundManager = GameObject.Find("SoundManager(Clone)").GetComponent<SoundManager>();
+        animator = GetComponentInChildren<Animator>();
+
     }
     enum MoveParameter
     {
@@ -102,6 +105,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(animator != null)
+            animator.SetFloat("Speed", Mathf.Abs(player.velocity.x));
+
         if(stateController.state.state != GameManager.State.Running)
             return;
 
