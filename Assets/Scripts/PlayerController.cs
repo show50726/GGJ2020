@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
                 if(type == Player.characterType.Attack){
                     RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
                     if(h.collider != null){
-                        tree.changeHP(tool.GetComponent<Tool>().Value);
+                        tree.changeHP(tool.GetComponent<Tool>().Value < 0 ? tool.GetComponent<Tool>().Value : 0);
                         Instantiate(tool, h.point, Quaternion.identity);
                         tool = null;
                     }

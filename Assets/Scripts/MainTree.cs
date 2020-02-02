@@ -30,8 +30,9 @@ public class MainTree : MonoBehaviour
 
     public void changeHP(float delta){
         curHP -= delta;
-        if(curHP < 0){
+        if(curHP <= 0){
             curHP = 0;
+            Death();
         }
         else if(curHP > maxHP) {
             curHP = maxHP;
