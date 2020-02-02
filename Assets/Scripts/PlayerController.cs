@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     private StateController stateController;
 
+    private SoundManager soundManager;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
         stateController = GameObject.FindGameObjectWithTag("StateController").GetComponent<StateController>();
+        soundManager = GameObject.Find("SoundManager(Clone)").GetComponent<SoundManager>();
     }
     enum MoveParameter
     {
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
         if(toolType == type){
             this.tool = tool;
             this.icon.GetComponent<SpriteRenderer>().sprite = icon;
+            soundManager.audiosource.PlayOneShot(soundManager.GetItem);
         }
     }
 
@@ -119,13 +123,16 @@ public class PlayerController : MonoBehaviour
                     if(tool.GetComponent<Tool>().type == Tool.toolType.Pesticide && onLeaf){
                         Instantiate(tool, transform.position - Vector3.up * 0.3f, Quaternion.identity);
                         tool = null;
+                        
                         leaf.wither();
+                        
                     }
                     else if(tool.GetComponent<Tool>().type != Tool.toolType.Pesticide){
                         RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
                         if(h.collider != null){
-                            tree.changeHP(tool.GetComponent<Tool>().Value);
+                            tree.changeHP(tool.GetComponent<Tool>().Value < 0 ? tool.GetComponent<Tool>().Value : 0);
                             Instantiate(tool, h.point, Quaternion.identity);
+                            soundManager.audiosource.PlayOneShot(soundManager.UseItem);
                             tool = null;
                         }
                     }
@@ -134,7 +141,9 @@ public class PlayerController : MonoBehaviour
                     if(tool.GetComponent<Tool>().type == Tool.toolType.Pesticide && onLeaf && leaf.iswither){
                         Instantiate(tool, transform.position - Vector3.up * 0.3f, Quaternion.identity);
                         tool = null;
+                        
                         leaf.recover();
+                        
                     }
                     else if(tool.GetComponent<Tool>().type != Tool.toolType.Pesticide){
                     RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Cancer"));
@@ -142,6 +151,7 @@ public class PlayerController : MonoBehaviour
                             tree.changeHP(tool.GetComponent<Tool>().Value);
                             Instantiate(tool, h.point, Quaternion.identity);
                             Destroy(h.transform.gameObject);
+                            soundManager.audiosource.PlayOneShot(soundManager.UseItem);
                             tool = null;
                         }
                     }
@@ -174,6 +184,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyUp(keyJump))
             {
+                soundManager.audiosource.PlayOneShot(soundManager.JumpSFX);
                 isJumping = true;
             }
 
