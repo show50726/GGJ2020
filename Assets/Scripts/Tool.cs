@@ -43,7 +43,7 @@ public class Tool : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(Value < 0) return;
+        if(Value < 0 || freq == 0) return;
 
         _time += Time.deltaTime;
         _total += Time.deltaTime;

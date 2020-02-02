@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - Cancer
   - Tree
+  - Leaf
   layers:
   - Default
   - TransparentFX

@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Leaf : MonoBehaviour
 {
+    public bool iswither = false;
     public Vector3 dampTarget;
     public Vector3 backTarget;
     private float dampingTargetValue;
     private float x, v;
     private bool isDamping = false;
+    private MainTree tree;
     // Start is called before the first frame update
+
 
     void Start()
     {
@@ -19,19 +23,27 @@ public class Leaf : MonoBehaviour
         }
         transform.eulerAngles = backTarget;
         dampTarget = new Vector3(backTarget.x, backTarget.y, backTarget.z - 10f);
+        tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        if(Input.GetKeyDown(KeyCode.Space)){
-            Addforce();
-        }
-        if(Input.GetKeyUp(KeyCode.Space)){
-            Leave();
-        }
-        */
+
+    }
+
+    public void wither(){
+        tree.changeHP(20f);
+        //GetComponent<SpriteRenderer>().color = new Color(1f, 0.7685f, 0.5058f);
+        GetComponent<SpriteRenderer>().DOColor(new Color(1f, 0.7685f, 0.5058f), 0.2f);
+        iswither = true;
+    }
+
+    public void recover(){
+        tree.changeHP(-20f);
+        //GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().DOColor(Color.white, 0.2f);
+        iswither = false;
     }
 
     /// <summary>

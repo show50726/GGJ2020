@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public KeyCode keyJump;
     public KeyCode keyAttack;
 
+    private bool onLeaf = false;
+
     private StateController stateController;
 
     /// <summary>
@@ -114,20 +116,34 @@ public class PlayerController : MonoBehaviour
         {
             if(Input.GetKeyDown(keyAttack) && tool != null){
                 if(type == Player.characterType.Attack){
-                    RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
-                    if(h.collider != null){
-                        tree.changeHP(tool.GetComponent<Tool>().Value < 0 ? tool.GetComponent<Tool>().Value : 0);
-                        Instantiate(tool, h.point, Quaternion.identity);
+                    if(tool.GetComponent<Tool>().type == Tool.toolType.Pesticide && onLeaf){
+                        Instantiate(tool, transform.position - Vector3.up * 0.3f, Quaternion.identity);
                         tool = null;
+                        leaf.wither();
+                    }
+                    else if(tool.GetComponent<Tool>().type != Tool.toolType.Pesticide){
+                        RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Tree"));
+                        if(h.collider != null){
+                            tree.changeHP(tool.GetComponent<Tool>().Value < 0 ? tool.GetComponent<Tool>().Value : 0);
+                            Instantiate(tool, h.point, Quaternion.identity);
+                            tool = null;
+                        }
                     }
                 }
                 else{
-                    RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Cancer"));
-                    if(h.collider != null && h.collider.gameObject.GetComponent<Tool>().type == tool.GetComponent<Tool>().type){
-                        tree.changeHP(tool.GetComponent<Tool>().Value);
-                        Instantiate(tool, h.point, Quaternion.identity);
-                        Destroy(h.transform.gameObject);
+                    if(tool.GetComponent<Tool>().type == Tool.toolType.Pesticide && onLeaf && leaf.iswither){
+                        Instantiate(tool, transform.position - Vector3.up * 0.3f, Quaternion.identity);
                         tool = null;
+                        leaf.recover();
+                    }
+                    else if(tool.GetComponent<Tool>().type != Tool.toolType.Pesticide){
+                    RaycastHit2D h = Physics2D.Raycast(player.transform.position, - Vector3.right * transform.localScale.x,  0.8f, 1<<LayerMask.NameToLayer("Cancer"));
+                        if(h.collider != null && h.collider.gameObject.GetComponent<Tool>().type == tool.GetComponent<Tool>().type){
+                            tree.changeHP(tool.GetComponent<Tool>().Value);
+                            Instantiate(tool, h.point, Quaternion.identity);
+                            Destroy(h.transform.gameObject);
+                            tool = null;
+                        }
                     }
                 }
                 
@@ -178,6 +194,21 @@ public class PlayerController : MonoBehaviour
                 player.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
             }
 
+        }
+    }
+
+    Leaf leaf;
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == "Leaf"){
+            onLeaf = true;
+            leaf = other.gameObject.GetComponent<Leaf>();
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other) {
+        if(other.gameObject.tag == "Leaf"){
+            onLeaf = false;
+            leaf = null;
         }
     }
 }
