@@ -65,18 +65,18 @@ public class PlayerController : MonoBehaviour
         switch (player.name)
         {
             case "Player1":
-                keyLeft = KeyCode.S;
+                keyLeft = KeyCode.A;
                 keyRight = KeyCode.D;
-                keyClimb = KeyCode.W;
-                keyJump = KeyCode.Space;
+                keyClimb = KeyCode.S;
+                keyJump = KeyCode.W;
                 keyAttack = KeyCode.LeftShift;
                 break;
             case "Player2":
                 keyLeft = KeyCode.LeftArrow;
                 keyRight = KeyCode.RightArrow;
-                keyClimb = KeyCode.UpArrow;
-                keyJump = KeyCode.RightShift;
-                keyAttack = KeyCode.M;
+                keyClimb = KeyCode.M;
+                keyJump = KeyCode.UpArrow;
+                keyAttack = KeyCode.LeftShift;
                 break;
             default:
                 keyLeft = KeyCode.S;
