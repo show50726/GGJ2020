@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tool : MonoBehaviour
 {
+    public toolType type;
     public float Value;
 
     public float freq = 1f;
@@ -12,6 +13,10 @@ public class Tool : MonoBehaviour
     [SerializeField]
     private ParticleSystem particleSystem;
     public MainTree tree;
+
+    public float y0;
+    public float amplitude;
+    public float speed = 1f;
 
     private float _time = 0f;
     private float _total;
@@ -25,6 +30,7 @@ public class Tool : MonoBehaviour
     }
 
     void Start() {
+        y0 = transform.localScale.y;
         float tmp = transform.position.y - baseY;
         tmp /= total;
         tmp = 1 - tmp;
@@ -42,16 +48,27 @@ public class Tool : MonoBehaviour
         _time += Time.deltaTime;
         _total += Time.deltaTime;
 
+        if(type == toolType.Fire){
+            float t = y0+amplitude*Mathf.Sin(speed*Time.time);
+            transform.localScale = new Vector3(t, t, t);
+        }
+
         if(_time >= freq){
             _time -= freq;
             tree.changeHP(Value);
-            particleSystem.Play();
+            if(particleSystem != null){
+                particleSystem.Play();
+            }
         }
         if(_total >= lifeTime){
             Destroy(gameObject);
         }
     }
 
-
+    public enum toolType{
+        Posion, 
+        Fire,
+        Pesticide
+    }
 
 }
