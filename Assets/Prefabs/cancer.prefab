@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9b242866104254a78bbf4c1013098605, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -110,11 +110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c67898435b2f405c96deb803a085501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   Value: 5
   freq: 2
   lifeTime: 10
   particleSystem: {fileID: 1050117649636840856}
   tree: {fileID: 0}
+  y0: 0
+  amplitude: 0
+  speed: 1
 --- !u!1001 &1050117649651386972
 PrefabInstance:
   m_ObjectHideFlags: 0
