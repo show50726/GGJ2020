@@ -8,6 +8,8 @@ public class RunningState : IState
     private float curTime;
     private float roundTime = 100f;
 
+    private MainTree tree;
+
     public RunningState(StateController controller) : base(controller)
     {
         state = GameManager.State.Running;
@@ -17,13 +19,12 @@ public class RunningState : IState
 
     public override void OnStateEnter() { 
         curTime = 0f;
+        tree = GameObject.FindGameObjectWithTag("Tree").GetComponent<MainTree>();
     }
     public override void StateUpdate() {
-        curTime += Time.deltaTime;
+        curTime += Time.deltaTime;  
 
-        
-
-        if(curTime >= roundTime){
+        if(curTime >= roundTime || tree.isDead){
             m_controller.SetState(nextState);
         }
     }

@@ -24,7 +24,7 @@ public class FinishedState : IState
         WinText = tree.WinText;
         WinText.SetActive(true);
         Winner = GameObject.Find("PlayerName").GetComponent<Text>();
-        if(tree.curHP <= 0){
+        if(tree.isDead){
             winner = true;
             Winner.text = "Player2";
         }
